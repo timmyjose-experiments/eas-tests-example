@@ -1,0 +1,20 @@
+appId: com.timmyjose.eastestsexample
+---
+- launchApp:
+    clearState: true
+- waitForAnimationToEnd:
+    timeout: 10000
+- takeScreenshot:
+    path: screenshots/Home
+- tapOn: 'Screen 1'
+- takeScreenshot: 
+    path: screenshots/Screen1
+- tapOn: 'Screen 11'
+- takeScreenshot:
+    path: screenshots/Screen11
+- tapOn: 'Back'
+- tapOn: 'Home'
+- tapOn: 'Screen 2'
+- takeScreenshot: 
+    path: screenshots/Screen2
+- tapOn: 'Home'
