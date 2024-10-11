@@ -6,6 +6,8 @@ jobs:
   build-and-test:
     name: Build, Test iOS, and Test Android
     runs-on: macos-14
+    env:
+      MAESTRO_CLI_NO_ANALYTICS: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
