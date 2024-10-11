@@ -30,6 +30,12 @@
         "projectId": "89e70e5f-dfa7-4103-ad4f-81f4720c01b6"
       }
     },
-    "owner": "timmyjose"
+    "owner": "timmyjose",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/89e70e5f-dfa7-4103-ad4f-81f4720c01b6"
+    }
   }
 }
