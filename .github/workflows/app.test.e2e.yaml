@@ -33,7 +33,7 @@ jobs:
       - name: Pod install for iOS
         run: npx pod-install
 
-      - name: Run iOS E2E Tests
+      - name: Take screenshots (iOS)
         uses: futureware-tech/simulator-action@v2
         with:
           model: 'iPhone 14 Pro'
@@ -48,7 +48,7 @@ jobs:
           ram-size: 2048M
           target: default
 
-      - name: Maestro Android Test
+      - name: Take screenshots (Android)
         run: maestro test maestro/take-screenshots.yaml
 
       - name: Archive screenshots
