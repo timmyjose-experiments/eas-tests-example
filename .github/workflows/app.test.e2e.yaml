@@ -38,7 +38,7 @@ jobs:
         with:
           model: 'iPhone 14 Pro'
       - name: Maestro iOS Test
-        run: maestro test maestro/ios-flow.yaml
+        run: maestro test maestro/take-screenshots.yaml
 
       - name: Start Android Emulator
         uses: reactivecircus/android-emulator-runner@v2
