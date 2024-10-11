@@ -1,0 +1,52 @@
+name: App / Tests / E2E
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Build, Test iOS, and Test Android
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Set LANG globally for subsequent steps
+        run: echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+
+      - name: Install maestro CLI
+        run: |
+          brew tap mobile-dev-inc/tap
+          brew install maestro
+
+      - name: Setup project
+        run: yarn setup
+
+      - name: Pod install for iOS
+        run: npx pod-install
+
+      - name: Run iOS E2E Tests
+        uses: futureware-tech/simulator-action@v2
+        with:
+          model: 'iPhone 14 Pro'
+      - name: Maestro iOS Test
+        run: maestro test maestro/ios-flow.yaml
+
+      - name: Start Android Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86_64
+          ram-size: 2048M
+          target: default
+
+      - name: Maestro Android Test
+        run: maestro test maestro/take-screenshots.yaml

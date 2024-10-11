@@ -1,0 +1,8 @@
+build:
+  name: Create a build and run maestro tests
+  steps:
+    - eas/build
+    - eas/maestro_test:
+        inputs:
+          flow_path: |
+            maestro/take-screenshots.yaml
