@@ -35,6 +35,9 @@ jobs:
       - name: Pod install for iOS
         run: npx pod-install
 
+      - name: Start expo metro server
+        run: npx expo start &
+
       - name: Take screenshots (iOS)
         uses: futureware-tech/simulator-action@v2
         with:
