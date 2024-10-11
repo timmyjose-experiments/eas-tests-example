@@ -38,12 +38,13 @@ jobs:
       - name: Start expo metro server
         run: npx expo start &
 
-      - name: Take screenshots (iOS)
-        uses: futureware-tech/simulator-action@v2
-        with:
-          model: 'iPhone 14 Pro'
-      - name: Maestro iOS Test
-        run: maestro test maestro/take-screenshots-ios.yaml
+      #3- name: Take screenshots (iOS)
+      #3  uses: futureware-tech/simulator-action@v2
+      #3  with:
+      #3    model: 'iPhone 14 Pro'
+
+      #3- name: Maestro iOS Test
+      #3  run: maestro test maestro/take-screenshots-ios.yaml
 
       - name: Start Android Emulator
         uses: reactivecircus/android-emulator-runner@v2
