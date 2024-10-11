@@ -15,6 +15,7 @@ jobs:
           node-version: 18.x
           cache: yarn
           cache-dependency-path: '**/yarn.lock'
+      - uses: dniHze/maestro-test-action@v1
 
       - uses: actions/setup-java@v3
         with:
@@ -35,27 +36,25 @@ jobs:
       - name: Pod install for iOS
         run: npx pod-install
 
-      - name: Start expo metro server
-        run: npx expo start &
-
-      #3- name: Take screenshots (iOS)
-      #3  uses: futureware-tech/simulator-action@v2
-      #3  with:
-      #3    model: 'iPhone 14 Pro'
-
-      #3- name: Maestro iOS Test
-      #3  run: maestro test maestro/take-screenshots-ios.yaml
-
-      - name: Start Android Emulator
+      - name: Take screenshots (Android)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           arch: x86_64
           ram-size: 2048M
           target: default
+          script: maestro test maestro/take-screenshots.yaml
 
-      - name: Take screenshots (Android)
-        run: maestro test maestro/take-screenshots.yaml
+      - name: Setup iOS maestro
+        uses: futureware-tech/simulator-action@v2
+        with:
+          model: 'iPhone 14 Pro'
+
+      - name: Take screenshots (iOS)
+        uses: dniHze/maestro-test-action@v1
+        with:
+          flow: maestro/take-screenshots-ios.yaml
+          report: report.xml
 
       - name: Archive screenshots
         uses: actions/upload-artifact@v4
