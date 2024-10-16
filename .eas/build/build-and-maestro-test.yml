@@ -11,6 +11,15 @@ build:
         inputs:
           sum: ${ steps.my_function.sum }
         command: echo ${inputs.sum}
+    - factorial:
+        inputs:
+          num: 10
+        id: factorial
+    - run:
+        name: Print the factorial of 10
+        inputs:
+          factorial: ${ steps.factorial.factorial }
+        command:  echo ${inputs.factorial}
     - eas/build
     - eas/maestro_test:
         inputs:
@@ -28,3 +37,11 @@ functions:
     outputs:
       - name: sum
     path: ./myFunction
+  factorial:
+    name: Factorial
+    inputs:
+      - name: num
+        type: number
+    outputs:
+      - name: factorial
+    path: ./factorial
