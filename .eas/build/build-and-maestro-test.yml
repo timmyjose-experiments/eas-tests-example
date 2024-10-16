@@ -1,8 +1,30 @@
 build:
   name: Create a build and run maestro tests
   steps:
+    - my_function:
+        inputs:
+          num1: 1
+          num2: 2
+        id: my_function
+    - run:
+        name: Print the sum
+        inputs:
+          sum: ${ steps.my_function.sum }
+        command: echo ${inputs.sum}
     - eas/build
     - eas/maestro_test:
         inputs:
           flow_path: |
             maestro/take-screenshots.yaml
+
+functions:
+  my_function:
+    name: My Function
+    inputs:
+      - name: num1
+        type: number
+      - name: num2
+        type: number
+    outputs:
+      - name: sum
+    path: ./myFunction
